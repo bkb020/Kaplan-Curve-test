@@ -1,4 +1,4 @@
-# Kaplan-Meier survival analysis by treatment through 220 days #  #
+# Kaplan-Meier survival analysis by treatment through 220 days 
 
 library(readxl)
 library(dplyr)
