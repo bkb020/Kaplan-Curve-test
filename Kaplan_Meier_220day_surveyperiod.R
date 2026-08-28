@@ -1,4 +1,4 @@
-# Kaplan-Meier survival analysis by treatment through 220 days 
+# Kaplan-Meier survival analysis by treatment through 100 days 
 
 library(readxl)
 library(dplyr)
@@ -8,7 +8,7 @@ library(survival)
 # 1. Select and read the data
 # -----------------------------------------------------------------------------
 
-survey_days <- 220
+survey_days <- 100
 
 # Opens a window for selecting the Excel workbook.
 data_path <- file.choose()
@@ -54,9 +54,9 @@ km_data <- fawns_raw %>%
     status %in% c("dead", "alive", "censor")
   ) %>%
   mutate(
-    # Alive fawns are censored at day 220.
+    # Alive fawns are censored at day 100.
     # Earlier collar losses remain censored on their observed day.
-    # Deaths after day 220 are censored at day 220.
+    # Deaths after day 100 are censored at day 100.
     analysis_time = pmin(
       coalesce(time_to_death, survey_days),
       survey_days
@@ -101,7 +101,7 @@ km_fit <- survfit(
   data = km_data
 )
 
-# Report survival estimates at day 220.
+# Report survival estimates at day 100.
 print(
   summary(
     km_fit,
